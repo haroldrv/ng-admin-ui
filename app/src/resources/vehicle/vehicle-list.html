@@ -1,0 +1,25 @@
+﻿<!-- Navigation -->
+<div ng-include="vm.navigationUrl"></div>
+
+
+<div ui-view>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Vehicles</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="hpanel">
+                <div class="panel-body">
+                    <a class="btn btn-primary" ng-click="vm.exportToExcel('#plantsGrid')"><i class="fa fa-file-excel-o"></i> &nbsp; Export to Excel</a>
+                    <p>
+                        <div id="plantsGrid" kendo-grid="plantsGrid" k-options="vm.plantsGridOptions" k-selectable="'row'"></div>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

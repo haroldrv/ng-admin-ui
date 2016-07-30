@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html ng-app="app">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title page-title></title>
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+
+    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//kendo.cdn.telerik.com/2016.2.714/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="//kendo.cdn.telerik.com/2016.2.714/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+    <link href="/bower_components/angular-loading-bar/build/loading-bar.min.css" type="text/css" rel="stylesheet" />
+    <link href="/bower_components/angular-notify/dist/angular-notify.min.css" rel="stylesheet" />
+    <link href="/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+    <link href="/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="assets/styles/sb-admin-2.css" rel="stylesheet">
+
+    <!-- endbower -->
+    <!-- endbuild -->
+</head>
+
+<body ng-controller="login">
+    <div id="wrapper" ui-view>
+    </div>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="/bower_components/angular/angular.min.js"></script>
+    <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.2.714/js/jszip.min.js"></script>
+    <script src="http://kendo.cdn.telerik.com/2016.2.714/js/kendo.all.min.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
+    <script src="/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
+    <script src="/bower_components/angular-notify/dist/angular-notify.min.js"></script>
+
+    <script src="src/app.js"></script>
+    <script src="src/core/app.core.js"></script>
+    <script src="src/core/directives.js"></script>
+    <script src="src/dashboard/dashboard.js"></script>
+    <script src="src/login/login.js"></script>
+    <script src="src/resources/resources.js"></script>
+    <script src="src/resources/vehicle/vehicle-list.controller.js"></script>
+    <script src="src/core/services/appConfig.js"></script>
+    <script src="src/core/services/auth.service.js"></script>
+    <script src="src/core/services/auth-interceptor.service.js"></script>
+    <script src="src/core/services/kendo.service.js"></script>
+    <script src="src/core/services/logger.service.js"></script>
+</body>
+
+</html>
