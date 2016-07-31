@@ -1,4 +1,4 @@
-﻿(function () {
+﻿namespace app {
     'use strict';
 
     angular
@@ -7,9 +7,13 @@
 
     authInterceptorService.$inject = ['$location', '$q', '$injector', 'localStorageService'];
 
-    function authInterceptorService($location, $q, $injector, localStorageService) {
+    function authInterceptorService(
+        $location: ng.ILocationService,
+        $q: ng.IQService,
+        $injector: any,
+        localStorageService: any) {
 
-        var service = {
+        let service = {
             request: request,
             responseError: responseError
         };
@@ -19,7 +23,7 @@
         function request(config) {
             config.headers = config.headers || {};
 
-            var authData = localStorageService.get('authData');
+            let authData = localStorageService.get('authData');
             if (authData) {
                 config.headers.Authorization = 'Bearer ' + authData.token;
             }
@@ -34,4 +38,4 @@
             return $q.reject(error);
         }
     }
-})();
+}

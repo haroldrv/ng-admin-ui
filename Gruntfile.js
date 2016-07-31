@@ -5,6 +5,7 @@ module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
     // Show grunt task time
+
     require('time-grunt')(grunt);
 
     // Configurable paths for the app
@@ -52,9 +53,16 @@ module.exports = function (grunt) {
 
         // Watch for changes in live edit
         watch: {
-            js: {
-                files: ['<%= app.app %>/src/**/*.js'],
-                tasks: ['jshint'],
+            // js: {
+            //     files: ['<%= app.app %>/src/**/*.js'],
+            //     tasks: ['jshint'],
+            //     options: {
+            //         livereload: '<%= connect.options.livereload %>'
+            //     }
+            // },
+            ts: {
+                files: ['<%= app.app %>/src/**/*.ts'],
+                tasks: ['ts'],
                 options: {
                     livereload: '<%= connect.options.livereload %>'
                 }
@@ -68,6 +76,12 @@ module.exports = function (grunt) {
                     '.tmp/styles/{,*/}*.css',
                     '<%= app.app %>/assets/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
+            }
+        },
+
+        ts: {
+            default: {
+                src: ['<%= app.app %>/**/*.ts', "!node_modules/**"]
             }
         },
 
@@ -86,23 +100,23 @@ module.exports = function (grunt) {
             server: '.tmp',
             live: {
                 files: [
-                {
-                    dot: true,
-                    src: [
                     {
+                        dot: true,
+                        src: [
+                            {
 
+                            }]
                     }]
-                }]
             },
             compile: {
                 files: [
-                {
-                    dot: true,
-                    src: [
-                        '<%= app.compile %>/{,*/}*',
-                        '.tmp'
-                    ]
-                }]
+                    {
+                        dot: true,
+                        src: [
+                            '<%= app.compile %>/{,*/}*',
+                            '.tmp'
+                        ]
+                    }]
             }
         },
 
@@ -119,21 +133,21 @@ module.exports = function (grunt) {
                     ],
                     dest: '<%= app.dist %>'
                 }, {
-                    expand: true,
-                    dot: true,
-                    cwd: '.tmp/concat',
-                    src: [
-                        '**/*.{annotated.js,css}',
-                        '**/vendor.js'
-                    ],
-                    dest: '<%= app.dist %>'
-                }, {
-                    expand: true,
-                    dot: true,
-                    cwd: 'bower_components/fontawesome/fonts',
-                    src: '*.*',
-                    dest: '<%= app.dist %>/assets/fonts'
-                }]
+                        expand: true,
+                        dot: true,
+                        cwd: '.tmp/concat',
+                        src: [
+                            '**/*.{annotated.js,css}',
+                            '**/vendor.js'
+                        ],
+                        dest: '<%= app.dist %>'
+                    }, {
+                        expand: true,
+                        dot: true,
+                        cwd: 'bower_components/fontawesome/fonts',
+                        src: '*.*',
+                        dest: '<%= app.dist %>/assets/fonts'
+                    }]
             },
             compile: {
                 files: [{
@@ -223,9 +237,9 @@ module.exports = function (grunt) {
                     src: '<%= app.dist %>/src/login/login.html',
                     dest: '<%= app.dist %>/src/login/login.html'
                 }, {
-                    src: '<%= app.dist %>/styles/vendor.css',
-                    dest: '<%= app.dist %>/styles/vendor.css'
-                }]
+                        src: '<%= app.dist %>/styles/vendor.css',
+                        dest: '<%= app.dist %>/styles/vendor.css'
+                    }]
             }
         },
 
@@ -237,8 +251,8 @@ module.exports = function (grunt) {
                 files: [{
                     '.tmp/scripts/scripts.annotated.js': '.tmp/scripts/scripts.js'
                 }, {
-                    '<%= app.dist %>/scripts/vendor.js': '.tmp/scripts/vendor.js'
-                }]
+                        '<%= app.dist %>/scripts/vendor.js': '.tmp/scripts/vendor.js'
+                    }]
             }
         },
 
@@ -256,6 +270,7 @@ module.exports = function (grunt) {
     grunt.registerTask('live', [
         'clean:server',
         'copy:styles',
+        'ts',
         'connect:livereload',
         'watch'
     ]);

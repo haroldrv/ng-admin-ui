@@ -20,6 +20,7 @@
     "grunt-filerev": "^2.0.0",
     "grunt-ng-annotate": "^1.0.1",
     "grunt-string-replace": "^1.2.1",
+    "grunt-ts": "^5.5.1",
     "grunt-usemin": "^2.4.0",
     "jshint-stylish": "^1.0.0",
     "load-grunt-tasks": "^0.6.0",

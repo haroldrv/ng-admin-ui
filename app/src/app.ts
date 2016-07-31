@@ -1,4 +1,5 @@
-(function () {
+namespace app {
+    
     angular
         .module('app', [
             'app.core',
@@ -13,9 +14,15 @@
         .config(configState)
         .run(function ($rootScope, $state) {
             $rootScope.$state = $state;
-        });;
+        });
 
-    function configState($stateProvider, $urlRouterProvider, $compileProvider, $httpProvider, $sceDelegateProvider, $provide) {
+    function configState(
+        $stateProvider: any, 
+        $urlRouterProvider: any, 
+        $compileProvider: any, 
+        $httpProvider: any, 
+        $sceDelegateProvider: any, 
+        $provide: any) {
 
         // Optimize load start with remove binding information inside the DOM element
         $compileProvider.debugInfoEnabled(true);
@@ -78,4 +85,4 @@
             });
         $httpProvider.interceptors.push('authInterceptorService');
     }
-})();
+}

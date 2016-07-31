@@ -1,58 +1,66 @@
-﻿(function () {
+﻿namespace app {
     'use strict';
 
-    angular
-        .module('app.resources')
-        .controller('vehicleListController', vehicleListController);
-    
-    vehicleListController.$inject = ['$state', 'appConfig', 'kendoService', 'localStorageService'];
+    class VehicleListController {
 
-    function vehicleListController($state, appConfig, kendoService, localStorageService) {
-        /* jshint validthis:true */
-        var vm = this;
-        var gridName = '#plantsGrid';
-        vm.buttonColour = appConfig.buttonColour;
-        vm.exportToExcel = kendoService.exportToExcel;
+        static $inject = ['$state', 'appConfig', 'kendoService', 'localStorageService'];
+        gridName: string;
+        buttonColour: string;
+        plantsGridOptions: any;
 
-        initialize();
+        constructor(
+            private $state: any,
+            private appConfig: any,
+            private kendoService: app.KendoService,
+            private localStorageService: any
+        ) {
+            this.gridName = '#plantsGrid';
+            this.buttonColour = appConfig.buttonColour;
 
-        function initialize() {
-            getVehicles();
+            this.initialize();
         }
-        
-        function getVehicles() {
-            var now = new Date();
 
-            var url = '/kendoPlants';
-            var plantColumns = [
+        initialize() {
+            this.getVehicles();
+        }
+
+        exportToExcel(){
+            this.kendoService.exportToExcel(this.gridName);
+        }
+
+        getVehicles() {
+            let now = new Date();
+
+            let url = '/kendoPlants';
+            let plantColumns = [
                 { field: 'id', title: 'Id', width: '8%', template: '#=id#' },
                 { field: 'type', title: 'Type', width: '10%', template: '#=type#' },
                 { field: 'regNo', title: 'Rego', width: '7%', template: '#=regNo#' },
                 { field: 'description', title: 'Description', template: '#=description#' },
                 { field: 'curKM', title: 'Current KM', width: '10%', template: '#=curKM#' },
                 { field: 'nextServiceAt', title: 'Next Service', width: '10%', template: '#=nextServiceAt#' },
-                { field: 'regoDueDate', title: 'Rego due date', width: '10%', template: '#= kendo.toString(kendo.parseDate(regoDueDate), "' + appConfig.shortDateFormat + '")#' },
+                { field: 'regoDueDate', title: 'Rego due date', width: '10%', template: '#= kendo.toString(kendo.parseDate(regoDueDate), "' + this.appConfig.shortDateFormat + '")#' },
                 { field: 'regoDueIn', title: 'Due in', width: '7%', template: '#: regoDueIn #' }
             ];
 
-            var commonSettings = {
+            let commonSettings = {
                 excel: {
                     fileName: 'vehicles_' + now.toLocaleDateString(),
                     filterable: true,
-                    allPages: true   
+                    allPages: true
                 },
                 dataSource: {
-                    pageSize: appConfig.pageSize,
+                    pageSize: this.appConfig.pageSize,
                     serverOperation: true,
                     serverPaging: true,
                     serverSorting: true,
                     serverFiltering: true,
                     transport: {
                         read: {
-                            url: appConfig.getBaseUrl() + url,
+                            url: this.appConfig.getBaseUrl + url,
                             contentType: 'application/json',
-                            beforeSend: function (req) {
-                                getRequestHeader(req);
+                            beforeSend: (req) => {
+                                this.getRequestHeader(req);
                             }
                         },
                         parameterMap: function (data, operation) {
@@ -69,25 +77,25 @@
                     },
                 },
                 dataBound: function (e) {
-                    var columns = e.sender.columns;
-                    var columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "nextServiceAt" + "]").index();
-                    var dueInIndex = this.wrapper.find(".k-grid-header [data-field=" + "regoDueIn" + "]").index();
+                    let columns = e.sender.columns;
+                    let columnIndex = this.wrapper.find(".k-grid-header [data-field=" + "nextServiceAt" + "]").index();
+                    let dueInIndex = this.wrapper.find(".k-grid-header [data-field=" + "regoDueIn" + "]").index();
 
                     // iterate the table rows and apply custom row and cell styling
-                    var rows = e.sender.tbody.children();
-                    for (var j = 0; j < rows.length; j++) {
-                        var row = $(rows[j]);
-                        var dataItem = e.sender.dataItem(row);
-                        var currentKm = dataItem.get("curKM");
-                        var nextServiceAt = dataItem.get("nextServiceAt");
-                        var regoDueIn = dataItem.get('regoDueIn');
+                    let rows = e.sender.tbody.children();
+                    for (let j = 0; j < rows.length; j++) {
+                        let row = $(rows[j]);
+                        let dataItem = e.sender.dataItem(row);
+                        let currentKm = dataItem.get("curKM");
+                        let nextServiceAt = dataItem.get("nextServiceAt");
+                        let regoDueIn = dataItem.get('regoDueIn');
 
                         if (regoDueIn < 30) {
-                            var dueInCell = row.children().eq(dueInIndex);
+                            let dueInCell = row.children().eq(dueInIndex);
                             dueInCell.addClass('next-service-due');
                         }
                         if (currentKm > (nextServiceAt - 1000)) {
-                            var cell = row.children().eq(columnIndex);
+                            let cell = row.children().eq(columnIndex);
                             cell.addClass('next-service-due');
                         }
                     }
@@ -105,15 +113,15 @@
                 },
                 columns: plantColumns
             };
-            vm.plantsGridOptions = commonSettings;
+            this.plantsGridOptions = commonSettings;
         }
 
-        function daysBetween(startDate, endDate) {
+        daysBetween(startDate, endDate) {
             Math.floor((Date.parse(endDate) - Date.parse(startDate)) / 86400000);
         }
 
-        function getRequestHeader(req) {
-            var authData = localStorageService.get('authData');
+        getRequestHeader(req) {
+            let authData = this.localStorageService.get('authData');
             if (authData) {
                 req.setRequestHeader('Authorization', 'Bearer ' + authData.token);
             }
@@ -121,4 +129,8 @@
             return req;
         }
     }
-})();
+
+    angular
+        .module('app.resources')
+        .controller('vehicleListController', VehicleListController);
+}
