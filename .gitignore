@@ -1,0 +1,6 @@
+.tmp
+.vscode
+.tscache
+node_modules
+bower_components
+/typings
