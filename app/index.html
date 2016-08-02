@@ -27,7 +27,7 @@
     <div id="wrapper" ui-view>
     </div>
 
-    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    <!--<script src="/bower_components/jquery/dist/jquery.min.js"></script>
     <script src="/bower_components/angular/angular.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/bower_components/metisMenu/dist/metisMenu.min.js"></script>
@@ -36,9 +36,43 @@
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/bower_components/angular-loading-bar/src/loading-bar.js"></script>
     <script src="/bower_components/angular-local-storage/dist/angular-local-storage.min.js"></script>
-    <script src="/bower_components/angular-notify/dist/angular-notify.min.js"></script>
+    <script src="/bower_components/angular-notify/dist/angular-notify.min.js"></script>-->
 
-    <script src="src/app.js"></script>
+    <script src="/node_modules/systemjs/dist/system.js"></script>
+    <script>
+        // set our baseURL reference path
+        SystemJS.config({
+            defaultJSExtensions: true,
+            // meta: {
+            //     './bower_components/jquery/dist/jquery.min.js': {
+            //         format: 'global',
+            //         export: 'jquery'
+            //     },
+            //     './bower_components/angular/angular.min.js': {
+            //         format: 'global',
+            //         exports: 'angular',
+            //         deps: ['jquery']
+            //     },
+            //     './bower_components/angular-ui-router/release/angular-ui-router.min.js': {
+            //         format: 'global',
+            //         exports: 'angular-ui-router',
+            //         deps: ['jquery', 'angular']
+            //     }
+            // },
+            map: {
+                'jquery': './bower_components/jquery/dist/jquery.min.js',
+                'angular': './bower_components/angular/angular.min.js',
+                'angular-ui-router': './bower_components/angular-ui-router/release/angular-ui-router.min.js',
+            },
+        });
+
+        // loads /js/main.js
+        SystemJS.import('src/app.js')
+            .then()
+            .catch(error => console.log(error));
+    </script>
+
+    <!--<script src="src/app.js"></script>
     <script src="src/core/app.core.js"></script>
     <script src="src/core/directives.js"></script>
     <script src="src/dashboard/dashboard.js"></script>
@@ -49,7 +83,7 @@
     <script src="src/core/services/auth.service.js"></script>
     <script src="src/core/services/auth-interceptor.service.js"></script>
     <script src="src/core/services/kendo.service.js"></script>
-    <script src="src/core/services/logger.service.js"></script>
+    <script src="src/core/services/logger.service.js"></script>-->
 </body>
 
 </html>

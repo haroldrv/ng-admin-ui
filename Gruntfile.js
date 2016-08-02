@@ -37,6 +37,9 @@ module.exports = function (grunt) {
                             connect().use(
                                 '/bower_components',
                                 connect.static('./bower_components')
+                            ).use(
+                                '/node_modules',
+                                connect.static('./node_modules')
                             ),
                             connect.static(appConfig.app)
                         ];

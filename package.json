@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "ng-admin-ui",
   "dependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "^0.4.5",
+    "systemjs": "^0.19.36"
   },
   "devDependencies": {
     "grunt-concurrent": "^1.0.0",
