@@ -27,12 +27,8 @@
             if (isValid) {
                 this.loading = true;
                 this.authService.login(this.loginData)
-                    .then(function(response) {
-                        this.loginSuceeded(response);
-                    })
-                    .catch(function(error){
-                        this.loginError(error);
-                    });
+                    .then(response => this.loginSuceeded(response))
+                    .catch(error => this.loginError(error));
             }
             return false;
         }
