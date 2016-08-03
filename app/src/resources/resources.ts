@@ -1,14 +1,14 @@
-﻿namespace app {
-    'use strict';
+﻿import VehicleListController from './vehicle/vehicle-list.controller';
 
-    class Resources {
-        navigationUrl: string;
-        constructor(){
-            this.navigationUrl = 'src/core/views/navigation.html';
-        }
+class Resources {
+    navigationUrl: string;
+    constructor() {
+        this.navigationUrl = 'src/core/views/navigation.html';
     }
-
-    angular
-        .module('app.resources', [])
-        .controller('resources', Resources);
 }
+
+export default angular
+    .module('app.resources', [])
+    .controller('resources', Resources)
+    .controller('vehicleListController', VehicleListController)
+    .name;

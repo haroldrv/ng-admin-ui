@@ -30,5 +30,5 @@ export default class AuthInterceptorService {
 }
 
 angular
-    .module('app')
+    .module('app.core')
     .service('authInterceptorService', AuthInterceptorService);

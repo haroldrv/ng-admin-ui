@@ -1,19 +1,25 @@
 import * as angular from 'angular';
 import * as router from 'angular-ui-router';
 import 'angular-ui-router';
+import 'local-storage';
+import 'notify';
+import 'kendo';
+import appCore from './core/app.core';
+import appLogin from './login/app.login';
+import appDashboard from './dashboard/dashboard';
+import appResources from './resources/resources';
 
 var app = angular
     .module('app', [
-        'ui.router'
-        //'app.core',
-        //'app.login',
-        //'app.dashboard',
-        //'app.resources',
-        //'ui.router'
+        'ui.router',
+        appCore,
+        appLogin,
+        appDashboard,
+        appResources,
         //'angular-loading-bar',
-        //'LocalStorageModule',
-        //'cgNotify',
-        //'kendo.directives'
+        'LocalStorageModule',
+        'cgNotify',
+       'kendo.directives'
     ])
     .config(configState)
     .run(function ($rootScope, $state) {
@@ -86,7 +92,7 @@ function configState(
                 pageTitle: 'Vehicle details'
             }
         });
-    $httpProvider.interceptors.push('authInterceptorService');
+    //$httpProvider.interceptors.push('authInterceptorService');
 }
 
 export default app;

@@ -1,9 +1,6 @@
-﻿namespace app {
-    'use strict';
-
-    angular
-        .module('app.core')
-        .constant('appConfig', {
+﻿export default class AppConfig {
+    static get Default(): any {
+        return {
             longDateFormat: 'dd/MM/yyyy hh:mm tt',
             shortDateFormat: 'dd/MM/yyyy',
             parseFormat: 'yyyy-MM-ddTHH:mm:ss',
@@ -20,5 +17,7 @@
                 edit: 'btn btn-success',
                 view: 'btn btn-info'
             }
-        });
+        }
+
+    }
 }
