@@ -10,7 +10,7 @@ export default class AuthInterceptorService {
         private $injector: any,
         private localStorageService: any) { }
 
-    public request(config) {
+    public request = (config) => {
         config.headers = config.headers || {};
 
         let authData = this.localStorageService.get('authData');
@@ -28,7 +28,3 @@ export default class AuthInterceptorService {
         return this.$q.reject(error);
     }
 }
-
-angular
-    .module('app.core')
-    .service('authInterceptorService', AuthInterceptorService);

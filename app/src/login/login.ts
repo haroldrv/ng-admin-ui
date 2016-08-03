@@ -1,4 +1,7 @@
-﻿export default class Login {
+﻿import AuthService from './../core/services/auth.service';
+import LoggerService from './../core/services/logger.service';
+
+export default class Login {
 
     static $inject = ['$state', 'authService', 'loggerService'];
 
@@ -7,7 +10,7 @@
     loginData: any;
     year: any;
 
-    constructor(private $state: any, private authService: app.AuthService, private loggerService: app.LoggerService) {
+    constructor(private $state: any, private authService: AuthService, private loggerService: LoggerService) {
         this.year = (new Date()).getFullYear();
         this.initialize();
     }

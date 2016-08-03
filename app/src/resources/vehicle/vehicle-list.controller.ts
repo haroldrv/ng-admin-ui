@@ -1,4 +1,6 @@
-﻿export default class VehicleListController {
+﻿import KendoService from './../../core/services/kendo.service';
+
+export default class VehicleListController {
 
     static $inject = ['$state', 'appConfig', 'kendoService', 'localStorageService'];
     gridName: string;
@@ -8,7 +10,7 @@
     constructor(
         private $state: any,
         private appConfig: any,
-        private kendoService: app.KendoService,
+        private kendoService: KendoService,
         private localStorageService: any
     ) {
         this.gridName = '#plantsGrid';

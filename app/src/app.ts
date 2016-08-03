@@ -92,7 +92,7 @@ function configState(
                 pageTitle: 'Vehicle details'
             }
         });
-    //$httpProvider.interceptors.push('authInterceptorService');
+    $httpProvider.interceptors.push('authInterceptorService');
 }
 
 export default app;
